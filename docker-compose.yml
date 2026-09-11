@@ -1,0 +1,17 @@
+services:
+  backend:
+    build:
+      context: ./mern-demo
+      dockerfile: server/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      MONGODB_URI: ${MONGODB_URI}
+
+  frontend:
+    build:
+      context: ./mern-demo/client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
