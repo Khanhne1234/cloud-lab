@@ -9,9 +9,8 @@ services:
     ports:
       - "5000:5000"
     # Câu 55: Cấu hình biến môi trường MONGODB_URI
-    environment:
-      PORT: 5000
-      MONGODB_URI: mongodb+srv://cloudlab_user:HCSYd6QhDLc_L-M@cloud-lab.ud6xdyp.mongodb.net/cloud-lab?appName=Cloud-lab
+    env_file:
+      - mern-demo/server/.env
 
   # Câu 52: Frontend Service sử dụng Image từ Docker Hub
   frontend:
