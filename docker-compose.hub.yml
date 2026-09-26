@@ -1,21 +1,17 @@
-# Câu 50: File Docker Compose triển khai từ Docker Hub
-
 services:
 
-  # Câu 51: Backend Service sử dụng Image từ Docker Hub
   backend:
-    image: khanhne1234/mern-backend:1.0   # thuộc tính image thay cho build
-    # Câu 53: Ánh xạ port 5000:5000 cho Backend
-    ports:
-      - "5000:5000"
-    # Câu 55: Cấu hình biến môi trường MONGODB_URI
+    image: khanhne1234/mern-backend:1.0
+    network_mode: "host"
+    extra_hosts:
+      - "ac-jrn9ry9-shard-00-00.ud6xdyp.mongodb.net:159.143.64.95"
+      - "ac-jrn9ry9-shard-00-01.ud6xdyp.mongodb.net:159.143.63.127"
+      - "ac-jrn9ry9-shard-00-02.ud6xdyp.mongodb.net:159.143.63.91"
     env_file:
       - mern-demo/server/.env
 
-  # Câu 52: Frontend Service sử dụng Image từ Docker Hub
   frontend:
-    image: khanhne1234/mern-frontend:1.0   # thuộc tính image thay cho build
-    # Câu 54: Ánh xạ port Frontend ra máy local
+    image: khanhne1234/mern-frontend:2.0
     ports:
       - "3000:3000"
     depends_on:
