@@ -8,14 +8,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [editingId, setEditingId] = useState(null);
 
-  const getApiUrl = () => {
-    const hostname = window.location.hostname;
-    if (hostname.includes('app.github.dev')) {
-      return 'https://' + hostname.replace('-3000.', '-5000.') + '/api/students';
-    }
-    return 'http://localhost:5000/api/students';
-  };
-  const API_URL = getApiUrl();
+ const API_URL = 'https://mern-backend-236768.onrender.com/api/students';
 
   const loadStudents = () => {
     fetch(API_URL)
