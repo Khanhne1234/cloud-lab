@@ -8,7 +8,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [editingId, setEditingId] = useState(null);
 
- const API_URL = 'https://mern-backend-236768.onrender.com/api/students';
+const API_URL = '/api/students';
 
   const loadStudents = () => {
     fetch(API_URL)
@@ -58,7 +58,8 @@ function App() {
 
   return (
     <div className="container">
-      <h2 className="title">Quản Lý Sinh Viên-Verion 2.0</h2>
+    <h2>Quản Lý Sinh Viên</h2>
+      <p>Phiên bản 2.0 - Production Cloud PaaS (Auto-Deployed)</p>
       <form className="form-container" onSubmit={handleSubmit}>
         <input className="input-field" placeholder="MSSV" value={studentId} onChange={(e) => setStudentId(e.target.value)} required />
         <input className="input-field" placeholder="Họ tên" value={name} onChange={(e) => setName(e.target.value)} required />

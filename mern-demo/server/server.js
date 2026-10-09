@@ -159,10 +159,18 @@ app.delete('/api/students/:id', async (req, res) => {
   }
 });
 
+
+// Health Check Endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'UP',
+        timestamp: new Date(),
+        uptime: process.uptime()
+    });
+});
 // ========================================
 // Khởi động Server
 // ========================================
-
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server đang chạy tại port ${PORT}`);
+    console.log(`Backend phiên bản 1.2 - Auto Deploy thành công - Port ${PORT}`);
 });

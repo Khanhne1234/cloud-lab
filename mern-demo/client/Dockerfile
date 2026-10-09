@@ -1,17 +1,21 @@
-FROM node:20
+
+# Giai doan 1: Build React
+FROM node:20 AS build
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-
-RUN npm install --include=optional
+COPY package*.json ./
+RUN npm ci --include=optional
 
 COPY . .
-
 RUN npm run build
 
-RUN npm install -g serve
+# Giai doan 2: Nginx Reverse Proxy
+FROM nginx:alpine
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 3000
 
-CMD ["serve", "-s", "dist", "-l", "3000"]
+CMD ["nginx", "-g", "daemon off;"]
