@@ -51,10 +51,40 @@ const API_URL = '/api/students';
     }
   };
 
-  const handleDelete = (id) => {
-    fetch(`${API_URL}/${id}`, { method: 'DELETE' })
-      .then(() => { if (editingId === id) handleCancelEdit(); loadStudents(); });
-  };
+ 
+const handleDelete = async (sv) => {
+  const confirmDelete = window.confirm(
+    `Bạn có chắc chắn muốn xóa sinh viên này không?\n\n` +
+    `MSSV: ${sv.studentId}\n` +
+    `Họ tên: ${sv.name}\n` +
+    `Email: ${sv.email}\n\n` +
+    `Lưu ý: Hành động này không thể hoàn tác!`
+  );
+
+  if (!confirmDelete) {
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/${sv._id}`, {
+      method: 'DELETE'
+    });
+
+    if (!response.ok) {
+      throw new Error('Xóa sinh viên thất bại!');
+    }
+
+    if (editingId === sv._id) {
+      handleCancelEdit();
+    }
+
+    await loadStudents();
+    alert('Đã xóa sinh viên thành công!');
+  } catch (error) {
+    alert('Lỗi khi xóa sinh viên: ' + error.message);
+  }
+};
+
 
   return (
     <div className="container">
@@ -82,7 +112,7 @@ const API_URL = '/api/students';
                   <td>
                     <div className="actions-cell">
                       <button className="btn-edit" onClick={() => handleEdit(sv)}>Sửa</button>
-                      <button className="btn-delete" onClick={() => handleDelete(sv._id)}>Xóa</button>
+                      <button className="btn-delete" onClick={() => handleDelete(sv)}>Xóa</button>
                     </div>
                   </td>
                 </tr>
