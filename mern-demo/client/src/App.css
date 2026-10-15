@@ -164,3 +164,10 @@ body {
 .btn-cancel:hover {
   background-color: #e2e8f0;
 }
+
+.container h2{
+  text-align: center;
+}
+.container > p {
+  text-align: center;
+}
